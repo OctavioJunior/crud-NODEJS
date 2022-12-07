@@ -1,0 +1,17 @@
+{
+  "name": "crud-nodejs",
+  "version": "1.0.0",
+  "description": "crud basico em nodeJS",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/server.js"
+  },
+  "author": "Octavio Chagas Jr",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongodb": "^4.12.1",
+    "mongoose": "^6.8.0",
+    "nodemon": "^2.0.20"
+  }
+}
