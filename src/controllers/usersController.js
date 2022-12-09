@@ -1,49 +1,42 @@
-const {
-  allUsersService,
-  userByIdService,
-  createUserService,
-  deleteUserService,
-  editUserService,
-} = require("../services/usersService");
+const UsersService
+  = require("../services/usersService");
 
-const allUsersController = async (req, res) => {
-  const users = await allUsersService();
-  res.json(users);
-};
+class UsersController {
+  constructor() {
 
-const oneUserController = async (req, res) => {
-  const { id } = req.params;
+    this.allUsers = async (req, res) => {
+      const users = await UsersService.allUsers();
+      res.json(users);
+    };
 
-  const getUserById = await userByIdService(id);
-  res.json(getUserById);
-};
+    this.oneUser = async (req, res) => {
+      const { id } = req.params;
 
-const createUserController = async (req, res) => {
-  const { name, email, pass } = req.body;
+      const getUserById = await UsersService.userById(id);
+      res.json(getUserById);
+    };
 
-  const createNewUser = await createUserService(name, email, pass);
-  res.json(createNewUser);
-};
+    this.createUser = async (req, res) => {
+      const { name, email, pass } = req.body;
 
-const deleteUserController = async (req, res) => {
-  const { id } = req.params;
+      const createNewUser = await UsersService.createUser(name, email, pass);
+      res.json(createNewUser);
+    };
 
-  const removeUserById = await deleteUserService(id);
-  res.send("User removed!");
-};
+    this.deleteUser = async (req, res) => {
+      const { id } = req.params;
 
-const editUserController = async (req, res) => {
-  const { id } = req.params;
-  const { name, email, pass } = req.body;
+      const removeUserById = await UsersService.deleteUser(id);
+      res.send("User removed!");
+    };
 
-  const editUserById = await editUserService(id, name, email, pass);
-  res.send("User updated!");
-};
+    this.editUser = async (req, res) => {
+      const { id } = req.params;
+      const { name, email, pass } = req.body;
 
-module.exports = {
-  allUsersController,
-  oneUserController,
-  createUserController,
-  deleteUserController,
-  editUserController,
-};
+      const editUserById = await UsersService.editUser(id, name, email, pass);
+      res.send("User updated!");
+    };
+  }
+}
+module.exports = new UsersController();
